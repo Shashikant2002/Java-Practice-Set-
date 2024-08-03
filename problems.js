@@ -74,24 +74,93 @@
 
 // console.log(countResult);
 
-let arr = [8, 5, 6, 7, 1, 2, 3, 4, 5, 101, 121, 200];
+// let arr = [8, 5, 6, 7, 1, 2, 3, 4, 5, 101, 121, 200];
 
-let subSeq = [];
+// let subSeq = [];
 
-for (let i = 0; i < arr.length; i++) {
-  if (i == 0) {
-    subSeq.push({ ele: arr[i], start: true });
-  } else {
-    if (arr[i] + 1 == arr[i + 1]) {
-      subSeq.push({ ele: arr[i], start: false });
+// for (let i = 0; i < arr.length; i++) {
+//   if (i == 0) {
+//     subSeq.push({ ele: arr[i], start: true });
+//   } else {
+//     if (arr[i] + 1 == arr[i + 1]) {
+//       subSeq.push({ ele: arr[i], start: false });
+//     } else {
+//       subSeq.push({ ele: arr[i], start: true });
+//     }
+//   }
+
+//   let incInclude = arr[i] + 1;
+//   let decInclude = arr[i] - 1;
+
+//   console.log("new =======>>>>>>>");
+//   console.log(incInclude, decInclude);
+// }
+
+// console.log(subSeq);
+
+// function topKFrequent(nums, k) {
+//   console.log(nums);
+
+//   if (nums.length == 1) {
+//     return nums;
+//   }
+
+//   let tempRes = [];
+
+//   nums.forEach((element) => {
+//     let isIncluded = tempRes.findIndex((ele) => element == ele.num);
+
+//     if (isIncluded == -1) {
+//       tempRes.push({ num: element, count: 1 });
+//     } else {
+//       console.log(isIncluded);
+//       tempRes[isIncluded].count += 1;
+//     }
+//   });
+
+//   let sorted = tempRes.sort((a, b) => a.count - b.count);
+//   let result = sorted.splice(sorted.length - k, k);
+
+//   return result.map((ele) => ele.num);
+// }
+
+// console.log(topKFrequent([1, 1, 1, 2, 2, 3], 2));
+
+function findLongestConsecutiveSequence(arr) {
+  if (arr.length === 0) return [];
+
+  // Sort the array
+  arr.sort((a, b) => a - b);
+
+  let longestStreak = 1;
+  let currentStreak = 1;
+  let longestSequence = [arr[0]];
+  let currentSequence = [arr[0]];
+
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] !== arr[i - 1]) {
+      if (arr[i] === arr[i - 1] + 1) {
+        currentStreak++;
+        currentSequence.push(arr[i]);
+      } else {
+        if (currentStreak > longestStreak) {
+          longestStreak = currentStreak;
+          longestSequence = [...currentSequence];
+        }
+        currentStreak = 1;
+        currentSequence = [arr[i]];
+      }
     }
   }
 
-  let incInclude = arr[i] + 1;
-  let decInclude = arr[i] - 1;
+  if (currentStreak > longestStreak) {
+    longestSequence = [...currentSequence];
+  }
 
-  console.log("new =======>>>>>>>");
-  console.log(incInclude, decInclude);
+  return longestSequence;
 }
 
-console.log(subSeq);
+// Example usage:
+const input = [8, 5, 6, 7, 1, 2, 3, 4, 5, 101, 121, 200];
+const longestSequence = findLongestConsecutiveSequence(input);
+console.log(longestSequence); // Output: [1, 2, 3, 4, 5]

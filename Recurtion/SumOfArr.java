@@ -1,18 +1,18 @@
 class SumOfArr {
 
-    static int sum(int[] arr, int length) {
+    static int sum(int num) {
 
-        if (length <= 0) {
+        if (num <= 0) {
             return 0;
         }
 
-        return (sum(arr, length - 1) + arr[length - 1]);
+        return (sum(num));
     }
 
     public static void main(String[] args) {
-        int arr[] = { 1, 2, 3, 4, 5 };
+        int num = 10;
 
-        int result = sum(arr, arr.length);
+        int result = sum(num);
 
         System.out.println("result =>>>>> " + result);
 
