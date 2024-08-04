@@ -1,22 +1,17 @@
 public class FirstNaturalNum {
     static void printNumber(int num, int numSum) {
         if (num < 0) {
+            System.out.println("Sum of the Natural Number =======>>>>>>>>>>>>>>>> " + numSum);
             return;
         }
-        System.out.println(num);
 
-        numSum = numSum + num - 1;
-
+        numSum = numSum + num;
         printNumber(num - 1, numSum);
     }
 
     public static void main(String[] args) {
 
-        int num = 0;
-
-        printNumber(5, num);
-
-        System.out.println("Sum is =======>>>>>> " + num);
+        printNumber(100, 0);
 
     }
 }
